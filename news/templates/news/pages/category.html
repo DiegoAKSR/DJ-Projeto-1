@@ -1,0 +1,21 @@
+{% extends 'global/base.html' %}
+
+{% block title %}Category{% endblock title %}
+{% block content %} 
+<section class="section section-news">
+    <div class="space"></div>
+
+    {% include 'news/partials/search.html'%}
+
+    <main class="main-content-conteiner">
+        <div class="main-content-div main-content-div-list container">
+            {% for new in news %}
+                {% include 'news/partials/news.html' %}
+            {% endfor %} 
+        </div>
+        </div>
+    </main>
+
+</section>
+
+{% endblock content %}
