@@ -5,6 +5,10 @@ from news.models import New
 from util.news.factory import make_recipe
 
 
+def games(request):
+    return render(request, 'news/pages/games.html')
+
+
 def home(request):
     news = New.objects.filter(is_published=True).order_by('-id')
     return render(request, 'news/pages/home.html',
