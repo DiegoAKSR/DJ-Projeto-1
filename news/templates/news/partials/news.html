@@ -16,23 +16,31 @@
     </div>
     <div class="news-author">
         <span class="news-author-item">
-            <i class="fas fa-user"></i>
-            {% if new.author.first_name%}
-                {{new.author.first_name}}
+
+            {% if new.author is not None %}
+                <i class="fas fa-user"></i>
+                {% if new.author.first_name%}
+                    {{new.author.first_name}}
+                {% else %}
+                    {{ new.author.username }}
+                {% endif %}
             {% else %}
-                {{ new.author.username }}
+            <i class="fas fa-user"></i> Removido
             {% endif %}
         </span>
         <span class="news-author-item">
             <i class="fas fa-calendar-alt"></i>     
             {{ new.created_at|date:"d/m/y"}} ás {{ new.created_at|date:"H:i "}}       
             </span>
-        <span class="news-author-item">
-            <a href="{% url 'news:category' new.category.id %}">
-                <i class="fas fa-layer-group"></i>
-                <span>{{ new.category.name}}</span>
-            </a>
-        </span>
+
+        {% if new.category is not None%}
+            <span class="news-author-item">
+                <a href="{% url 'news:category' new.category.id %}">
+                    <i class="fas fa-layer-group"></i>
+                    <span>{{ new.category.name}}</span>
+                </a>
+            </span>
+        {% endif %}
     </div>
 
     <div class="news-content">
@@ -49,11 +57,15 @@
     {% endif %}
 
     {% if is_detail_page is True %}
-        <div class="news_details_content">
-            {{ new.preparation_steps|linebreaksbr }}
-        </div>
+        <div class="news_details_content">      
+            {% if new.text_post_html is True %}
+                {{ new.text_post|safe }}
+            {% else %}
+                {{ new.text_post|linebreaksbr }}
         
-    
+
+            {% endif %}
+        </div>          
     {% endif %}
 
 
