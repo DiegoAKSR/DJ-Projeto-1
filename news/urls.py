@@ -8,5 +8,6 @@ urlpatterns = [
     path('', views.home, name="home"),
     path('news/category/<int:category_id>/', views.category, name="category"),
     path('news/<int:id>/', views.news, name="new"),
-    path('news/games', views.games, name="games")
+    path('news/games', views.games, name="games"),
+    path('news/storys', views.storys, name="storys")
 ]

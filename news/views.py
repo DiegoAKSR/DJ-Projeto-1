@@ -9,6 +9,10 @@ def games(request):
     return render(request, 'news/pages/games.html')
 
 
+def storys(request):
+    return render(request, 'news/pages/story.html')
+
+
 def home(request):
     news = New.objects.filter(is_published=True).order_by('-id')
     return render(request, 'news/pages/home.html',

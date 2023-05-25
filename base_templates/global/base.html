@@ -45,7 +45,7 @@
                 <ul onclick="getElementById('close-menu').checked = false;">
                     <li><a href="{% url 'news:home' %}">Home</a></li>
                     <li><a href="{% url 'news:games' %}">Historia</a></li>
-                    <li><a href="#recrutamento">Recrutamento</a></li>
+                    <li><a href="{% url 'news:storys' %}">Recrutamento</a></li>
                 </ul>
             </nav>
         </div>
@@ -57,11 +57,11 @@
         <div class="contact">
             <ul class="ul-contact">
                 <li class="icon-contact"><a href="https://discord.gg/pxRVrPtk" target="_blank"
-                        rel="noopener noreferer"><img src="global/img/discord.png"></a></li>
+                        rel="noopener noreferer"><img src="{% static "global/img/discord.png" %}"></a></li>
                 <li class="icon-contact"><a href="https://www.twitch.tv/ws_tarkynarok" target="_blank"
-                        rel="noopener noreferer"><img src="global/img/twitch.png"></a></li>
+                        rel="noopener noreferer"><img src="{% static "global/img/twitch.png" %}"></a></li>
                 <li class="icon-contact"><a href="https://www.instagram.com/ws_tarkynarok/" target="_blank"
-                        rel="noopener noreferer"><img src="global/img/instagram.png"></a></li>
+                        rel="noopener noreferer"><img src="{% static "global/img/instagram.png" %}"></a></li>
             </ul>
         </div>
         <p class="footer-p">Produzido por Diego Nunes</p>
