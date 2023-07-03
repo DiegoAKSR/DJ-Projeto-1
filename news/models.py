@@ -12,7 +12,7 @@ class Category(models.Model):
 class New(models.Model):
     title = models.CharField(max_length=70)
     description = models.CharField(max_length=150)
-    slug = models.SlugField()
+    slug = models.SlugField(unique=True)
     text_post = models.TextField()
     text_post_html = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True)
