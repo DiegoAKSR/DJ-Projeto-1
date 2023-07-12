@@ -1,8 +1,13 @@
+import os
+
 from django.db.models import Q
 from django.http import Http404
 from django.shortcuts import get_object_or_404, render
 
 from news.models import New
+from utils.pagination import make_pagination
+
+PER_PAGE = int(os.environ.get('PER_PAGE', 6))
 
 
 def games(request):
@@ -15,9 +20,13 @@ def storys(request):
 
 def home(request):
     news = New.objects.filter(is_published=True).order_by('-id')
+    page_object, pagination_range = make_pagination(request, news, PER_PAGE)
+
     return render(request, 'news/pages/home.html',
-                  context={'news': news,
-                           })
+                  context={
+                      'news': page_object,
+                      'pagination_range': pagination_range
+                  })
 
 
 def category(request, category_id):
@@ -28,8 +37,11 @@ def category(request, category_id):
     if not news:
         raise Http404("Not Found 😱")
 
+    page_object, pagination_range = make_pagination(request, news, PER_PAGE)
+
     return render(request, 'news/pages/category.html',
-                  context={'news': news,
+                  context={'news': page_object,
+                           'pagination_range': pagination_range,
                            'title': f'{news.first().category.name} - Category'
 
                            })
@@ -58,8 +70,12 @@ def search(request):
         is_published=True
     ).order_by('-id')
 
+    page_object, pagination_range = make_pagination(request, news, PER_PAGE)
+
     return render(request, 'news/pages/search.html', {
         'page_title': f'Search for "{search_term}"',
         'search_term': search_term,
-        'news': news,
+        'news': page_object,
+        'pagination_range': pagination_range,
+        'additional_url_query': f'&q={search_term}'
     })
