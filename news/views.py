@@ -1,5 +1,6 @@
 import os
 
+from django.contrib import messages
 from django.db.models import Q
 from django.http import Http404
 from django.shortcuts import get_object_or_404, render
@@ -57,6 +58,7 @@ def news(request, id):
 
 
 def search(request):
+
     search_term = request.GET.get('q', '').strip()
 
     if not search_term:
@@ -69,6 +71,9 @@ def search(request):
         Q(text_post__icontains=search_term),
         is_published=True
     ).order_by('-id')
+
+    message_term = search_term[0:50]
+    messages.success(request, f' {message_term}...')
 
     page_object, pagination_range = make_pagination(request, news, PER_PAGE)
 

@@ -1,8 +1,18 @@
 <div class="search-container">
     <div class="container">
         <form action="{% url 'news:search' %}" class="search-form">
-            <input type="search" class="search-input" name="q" value="{{ search_term }}" required>
+            <input type="search" class="search-input" name="q"  value="{{ search_term }}" required>
             <button type="submit" class="search-button"><i class="fas fa-search"></i></button>
         </form>
     </div>
 </div>
+{% if messages %}
+    <div class="main-content search_term_result">
+    
+            {% for message in messages %}
+            <p class="message_ter_pred">Exibindo Resultados para:</p>
+                <p class="message_term">{{ message }}</p>          
+        {%endfor%}
+    
+    </div>
+{%endif%}
