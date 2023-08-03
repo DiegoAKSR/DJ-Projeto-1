@@ -40,7 +40,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     # Meus apps
-    'news'
+    'news',
+    'authors'
 ]
 
 MIDDLEWARE = [
