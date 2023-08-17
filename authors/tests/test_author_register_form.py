@@ -91,3 +91,21 @@ class AuthorRegisterForIntegrationTest(DjangoTestcase):
         url = reverse('authors:create')
         response = self.client.get(url)
         self.assertEqual(response.status_code, 404)
+
+    def test_author_created_can_login(self):
+        url = reverse('authors:create')
+
+        self.form_data.update({
+            'username': 'testuser',
+            'password': '@12345aD',
+            'password2': '@12345aD',
+        })
+
+        self.client.post(url, data=self.form_data, follow=True)
+
+        is_autenticated = self.client.login(
+            username='testuser',
+            password='@12345aD',
+        )
+
+        self.assertTrue(is_autenticated)
