@@ -6,7 +6,8 @@ from django.http import Http404
 from django.shortcuts import redirect, render
 from django.urls import reverse
 
-from .forms import LoginForm, RegisterForm
+from authors.forms import LoginForm, RegisterForm
+from news.models import New
 
 # Create your views here.
 
@@ -55,7 +56,6 @@ def login_create(request):
         raise Http404()
 
     form = LoginForm(request.POST)
-    login_url = reverse('authors:login')
 
     if form.is_valid():
         authenticated_user = authenticate(
@@ -71,7 +71,7 @@ def login_create(request):
     else:
         messages.error(request, 'Erro de validacao.')
 
-    return redirect(login_url)
+    return redirect(reverse('authors:dashboard'))
 
 
 @login_required(login_url='authors:login', redirect_field_name='next')
@@ -84,3 +84,16 @@ def logout_view(request):
 
     logout(request)
     return redirect(reverse('authors:login'))
+
+
+@login_required(login_url='authors:login', redirect_field_name='next')
+def dashboard(request):
+    news = New.objects.filter(
+        is_published=False,
+        author=request.user,
+    )
+    return render(
+        request,
+        'authors/pages/dashboard.html',
+        context={
+            'news': news, })

@@ -1,0 +1,10 @@
+{% if request.user.is_authenticated %}
+<form
+    class="inline-form form-delete"
+    action="{% url 'authors:dashboard_new_delete' new.id %}"
+    method="POST">
+    {% csrf_token %} 
+    <input type="hidden" name="username" value="{{ request.user.username }}">
+    <button class="plaintext-button"  type="submit">X</button>
+</form>
+{% endif %}

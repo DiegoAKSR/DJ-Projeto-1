@@ -1,0 +1,9 @@
+{% if request.user.is_authenticated %}
+            <h1 class="login_message"> 
+                Voce esta alterando uma Publicação. <br>
+                Clique aqui para
+                <a href="{% url 'authors:dashboard' %}"> Voltar </a>
+           
+                </from>
+             </h1>
+{% endif %}

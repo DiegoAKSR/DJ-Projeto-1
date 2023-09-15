@@ -1,16 +1,12 @@
 <div class="form-recrut">
-    <form action="{{ form_action }}" method="POST">
+    <form action="{{ form_action }}" method="POST" enctype="multipart/form-data">
         {% csrf_token %}
         
         <div class="form-content from_content-grid">
-            {% for message in messages %}
-                <div class="message {{ message.tags }}">
-                    {{ message }}
-                </div>
-            {% endfor %}
+            {% include 'global/partials/messages.html' %}
 
             {% for field in form %}
-                <div class="form-group">
+                <div class="form-group {{ field.field.widget.attrs.class }}">
                     <label for="{{ field.id_for_label }}"> {{ field.label }} </label>
                     {{ field }}
                     
@@ -25,14 +21,25 @@
 
 
                 </div>
+
+                {% if field.name == 'cover' and field.value.url %}
+                    <div class="span-2">
+                        <img src="{{ field.value.url }}" alt="Capa para {{ new.title }}">
+                    </div>
+
+                {% endif %}
+
             {% endfor %}
         </div>
         
         <div class="form-content from_content-grid">
-            <div class="form-group">
-                <button type="submit">Enviar</button>
+            <div class="button-container">
+                <div class="button-submit" ><button type="submit">Enviar</button></div>
+                
+                
             </div>
     
         </div>
     </form>
 </div>
+

@@ -1,0 +1,24 @@
+{% extends 'global/base.html' %}
+
+{% block title %} Dashboard News Create {% endblock title%}
+
+{% block content %}
+
+<section id="recrutamento" class="section-form-recrut">
+        <h1 class="title_recrut h1-para1"> Painel de Criação  </h1>
+        
+        <h1 class="login_message"> 
+                Voce esta Criando uma Publicação. <br>
+                Clique aqui para
+                <a href="{% url 'authors:dashboard' %}"> Voltar </a>
+           
+        </h1>
+
+        {% include 'global/partials/form.html' %}
+  
+
+</section>
+
+
+
+{% endblock content %}

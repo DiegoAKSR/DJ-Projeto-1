@@ -6,18 +6,7 @@
 
 <section id="recrutamento" class=" section-form-recrut">
         <h1 class="title_recrut h1-para1">Login</h1>
-        {% if request.user.is_authenticated %}
-            <h1 class="h1-para1"> 
-                Voce esta logado como 
-                {{ request.user.username}}.
-
-                <form action="{% url 'authors:logout' %}" method='POST'>
-                    {% csrf_token %}
-                    <input type="hidden" name="username" value="{{ request.user.username }}">
-                    <button class="" type="submit">Deslogar</button>
-                </from>
-             </h1>
-        {% endif %}
+        {% include 'authors/partials/login_messages.html' %}
 
         {%if not request.user.is_authenticated %}
 

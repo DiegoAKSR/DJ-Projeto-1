@@ -1,0 +1,19 @@
+{% extends 'global/base.html' %}
+
+{% block title %} Dashboard News {% endblock title%}
+
+{% block content %}
+
+<section id="recrutamento" class="section-form-recrut">
+        <h1 class="title_recrut h1-para1">Dashboard News  </h1>
+        
+        {% include 'authors/partials/dashboard_new_messages.html' %}
+
+        {% include 'global/partials/form.html' %}
+  
+
+</section>
+
+
+
+{% endblock content %}

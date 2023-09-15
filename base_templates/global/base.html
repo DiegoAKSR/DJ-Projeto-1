@@ -26,6 +26,9 @@
 
    <link rel="stylesheet" href="{% static 'global/css/global_style.css' %}">
 
+   
+
+
 </head>
 
 <body id="Inicio">
@@ -46,6 +49,7 @@
                     <li><a href="{% url 'news:home' %}">Home</a></li>
                     <li><a href="{% url 'news:games' %}">Historia</a></li>
                     <li><a href="{% url 'news:storys' %}">Recrutamento</a></li>
+                    <li><a href="{% url 'authors:dashboard' %}">Painel de controle</a></li>
                 </ul>
             </nav>
         </div>
@@ -65,6 +69,7 @@
         </div>
         <p class="footer-p">Produzido por Diego Nunes</p>
     </footer>
+    <script src="{% static 'global/js/scripts.js' %}">  </script>
 </body>
 </html>
 

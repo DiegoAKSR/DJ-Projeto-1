@@ -1,0 +1,48 @@
+{% extends 'global/base.html' %}
+
+{% block title %} Dashboard ({{ user }})  {% endblock title%}
+
+{% block content %}
+
+<section id="recrutamento" class=" section-form-recrut">
+      
+        <h1 class="title_recrut h1-para1">Painel de Controle </h1>
+        {% include 'authors/partials/login_messages.html' %} 
+   
+        <div class="messages-dashboard">
+                <h3>
+                {% include 'global/partials/messages.html' %}
+                </h3>
+        </div>
+
+
+
+        <div class="authors-dashboard-container ">
+                <h3> Suas Publicações Ainda não Aprovadas. </h3>
+                <ul>
+                 {% for new in news %}
+                <li class="list-news">
+                        <a href="{% url 'authors:dashboard_new_edit' new.id %}">{{ new.title }} - </a>  
+                        <form 
+                        class="inline-form form-delete" 
+                        action="{% url 'authors:dashboard_new_delete' %}" 
+                        method='POST'>
+                          {% csrf_token %}
+                          <input type="hidden" name="id" value="{{ new.id }}">
+                          <button class="plaintext-button" type="submit">❌</button>
+                        </form>
+                      </li>
+                    {% empty %}
+                      <li> <p> Voce nao possui Publicações </p> </li>
+                 {% endfor %}
+                </ul>
+                <h3>   
+                        <a href="{% url 'authors:dashboard_create_new' %}">Criar</a>
+                </h3>
+        </div>
+
+</section>
+
+
+
+{% endblock content %}
